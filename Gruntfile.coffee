@@ -88,6 +88,7 @@ module.exports = (grunt) ->
         versionCode: -> 2
         targetSdkVersion: -> 18
         minSdkVersion: -> 11
+        versionName: "1.2.3"
         permissions: ['ACCESS_NETWORK_STATE']
         androidApplicationName: 'com.phonegap.test_custom_app'
 
