@@ -8,11 +8,11 @@
     tasks = {
       buildIcons: require('./ios/icons')(grunt).build,
       buildScreens: require('./ios/screens')(grunt).build,
-      setStatusBar: require('./ios/plist')(grunt).setStatusBar
+      updatePlist: require('./ios/plist')(grunt).updatePlist
     };
     return {
       run: function(fn) {
-        return fluid(tasks).buildIcons().buildScreens().setStatusBar().go(function(err, result) {
+        return fluid(tasks).buildIcons().buildScreens().updatePlist().go(function(err, result) {
           if (err) {
             grunt.fatal(err);
           }

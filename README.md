@@ -399,6 +399,10 @@ Example: `{"lib":{"www":{"id":"phonegap","version":"3.3.0"}}, "phonegap": {"id":
 
 You can find the PhoneGap App ID in your PhoneGap Builds panel.
 
+### gap:config-file entries for local builds
+
+`gap:config-file` entreis in config.xml are supported for local builds (currently only for ios, and only when `replace="true"`). These changes will be applied as part of the phonegap:build task.
+
 
 ## Tasks
 [[Back To Top]](#grunt-phonegap)
