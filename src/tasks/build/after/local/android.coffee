@@ -9,6 +9,7 @@ module.exports = android = (grunt) ->
     setTargetSdkVersion: require('./android/sdk_version')(grunt).setTarget
     setPermissions: require('./android/permissions')(grunt).set
     setAndroidApplicationName: require('./android/application_name')(grunt).set
+    setOrientation: require('./android/orientation')(grunt).set
 
   run: (fn) ->
     fluid(tasks)
@@ -17,6 +18,7 @@ module.exports = android = (grunt) ->
       .setTargetSdkVersion()
       .setPermissions()
       .setAndroidApplicationName()
+      .setOrientation()
       .buildIcons()
       .buildScreens()
       .go (err, result) ->
