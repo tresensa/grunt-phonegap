@@ -21,7 +21,8 @@ module.exports = orientation = (grunt) ->
       val = prefNode.getAttribute('value')
       if val
         grunt.log.writeln "Setting application orientation in '#{manifestPath}' to #{val}"
-        doc.getElementsByTagName('application')[0].setAttribute('android:screenOrientation', val)
+        activities = doc.getElementsByTagName('activity')
+        activity.setAttribute('android:screenOrientation', val) for activity in activities
 
     grunt.file.write manifestPath, doc
 

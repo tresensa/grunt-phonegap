@@ -10,7 +10,7 @@
     helpers = require('../../../../helpers')(grunt);
     return {
       set: function(fn) {
-        var configDoc, configFile, configFilePath, doc, dom, manifest, manifestPath, phonegapPath, prefNode, prefNodes, val, _i, _len;
+        var activities, activity, configDoc, configFile, configFilePath, doc, dom, manifest, manifestPath, phonegapPath, prefNode, prefNodes, val, _i, _j, _len, _len1;
         dom = xmldom.DOMParser;
         phonegapPath = helpers.config('path');
         configFilePath = path.join(phonegapPath, 'www', 'config.xml');
@@ -28,7 +28,11 @@
           val = prefNode.getAttribute('value');
           if (val) {
             grunt.log.writeln("Setting application orientation in '" + manifestPath + "' to " + val);
-            doc.getElementsByTagName('application')[0].setAttribute('android:screenOrientation', val);
+            activities = doc.getElementsByTagName('activity');
+            for (_j = 0, _len1 = activities.length; _j < _len1; _j++) {
+              activity = activities[_j];
+              activity.setAttribute('android:screenOrientation', val);
+            }
           }
         }
         grunt.file.write(manifestPath, doc);
