@@ -37,12 +37,20 @@ module.exports = plist = (grunt) ->
       if configNode.getAttribute('platform') is 'ios'
         if configNode.getAttribute('overwrite') is 'true'
           keyName = configNode.getAttribute('parent')
+          found = false
           for keyNode in keyNodes
             if keyNode.firstChild.nodeValue is keyName
+              found = true
               valueNode = keyNode.nextSibling.nextSibling
               for childNode in configNode.childNodes
                 valueNode.parentNode.insertBefore(doc.importNode(childNode,true), valueNode);
               valueNode.parentNode.removeChild(valueNode);
+          unless found
+            newNodes = new dom().parseFromString('<key>' + keyName + '</key>', 'text/xml');
+            dict = doc.getElementsByTagName('dict')[0]
+            dict.appendChild(newNodes);
+            for childNode in configNode.childNodes
+              dict.appendChild(doc.importNode(childNode, true));
         else
           # handle appending config updates
 

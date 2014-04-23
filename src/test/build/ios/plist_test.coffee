@@ -18,7 +18,7 @@ if helpers.canBuild 'ios'
       test.done()
 
     'plist file should contain gap:config-file changes from config.xml': (test) ->
-      test.expect 4
+      test.expect 6
       appName = grunt.config.get 'phonegap.config.name'
 
       xml = grunt.file.read "test/phonegap/platforms/ios/#{appName}/#{appName}-Info.plist"
@@ -27,4 +27,7 @@ if helpers.canBuild 'ios'
       test.equal 2, plist.plist.dict.array[0].string.length, "correct number of orientations"
       test.equal true, _.contains(plist.plist.dict.array[0].string, "UIInterfaceOrientationLandscapeLeft"), "contains orientation UIInterfaceOrientationLandscapeLeft"
       test.equal true, _.contains(plist.plist.dict.array[0].string, "UIInterfaceOrientationLandscapeRight"), "contains orientation UIInterfaceOrientationLandscapeRight"
+
+      test.equal true, _.contains(plist.plist.dict.key, "UIAppFonts"), "contains key UIAppFonts"
+      test.equal plist.plist.dict.array[2].string, 'test.ttf', "contains test.ttf"
       test.done()
