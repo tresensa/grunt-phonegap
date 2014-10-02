@@ -9,10 +9,10 @@
     var buildPlatform, helpers, local, remote, runAfter;
     helpers = require('../../helpers')(grunt);
     remote = function(platform, fn) {
-      return helpers.exec("phonegap remote build " + platform + " " + (helpers.setVerbosity()), fn);
+      return helpers.exec("cordova platform add " + platform + "; cordova build " + platform + " " + (helpers.setVerbosity()), fn);
     };
     local = function(platform, fn) {
-      return helpers.exec("phonegap local build " + platform + " " + (helpers.setVerbosity()), fn);
+      return helpers.exec("cordova platform add " + platform + "; cordova build " + platform + " " + (helpers.setVerbosity()), fn);
     };
     runAfter = function(provider, platform, fn) {
       var adapter;
