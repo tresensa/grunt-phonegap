@@ -6,6 +6,7 @@ module.exports = platform = (grunt) ->
 
   remote = (platform, fn) ->
     helpers.exec "cordova platform add #{platform}", ->
+      if platform is "ios"
         phonegapPath = helpers.config('path')
         buildScript = path.join(phonegapPath, 'platforms', 'ios', "cordova", "build")
 
@@ -14,10 +15,11 @@ module.exports = platform = (grunt) ->
         buildScriptText = buildScriptText.replace('CONFIGURATION_BUILD_DIR="$PROJECT_PATH/build/device"', 'CONFIGURATION_BUILD_DIR="$PROJECT_PATH/build/device" SHARED_PRECOMPS_DIR="$PROJECT_PATH/build/sharedpch"')
         grunt.file.write(buildScript, buildScriptText);
 
-        helpers.exec "cordova build #{platform} #{helpers.setVerbosity()}", fn
+      helpers.exec "cordova build #{platform} #{helpers.setVerbosity()}", fn
 
   local = (platform, fn) ->
     helpers.exec "cordova platform add #{platform}", ->
+      if platform is "ios"
         phonegapPath = helpers.config('path')
         buildScript = path.join(phonegapPath, 'platforms', 'ios', "cordova", "build")
 
@@ -26,7 +28,7 @@ module.exports = platform = (grunt) ->
         buildScriptText = buildScriptText.replace('CONFIGURATION_BUILD_DIR="$PROJECT_PATH/build/device"', 'CONFIGURATION_BUILD_DIR="$PROJECT_PATH/build/device" SHARED_PRECOMPS_DIR="$PROJECT_PATH/build/sharedpch"')
         grunt.file.write(buildScript, buildScriptText);
 
-        helpers.exec "cordova build #{platform} #{helpers.setVerbosity()}", fn
+      helpers.exec "cordova build #{platform} #{helpers.setVerbosity()}", fn
 
   runAfter = (provider, platform, fn) ->
     adapter = path.join __dirname, '..', 'after', provider, "#{platform}.js"
